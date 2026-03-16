@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Band Concept</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Noto+Serif+JP:wght@400;700&display=swap');
+
+  @page { margin: 10mm 15mm; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    color: #e0e0e0;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 300;
+    line-height: 1.9;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Page 1: Cover */
+  .cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(180, 40, 40, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .cover-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 12px;
+    color: #888;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+  }
+
+  .cover-main {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .cover-sub {
+    font-size: 14px;
+    color: #666;
+    letter-spacing: 4px;
+    margin-bottom: 80px;
+  }
+
+  .cover-line {
+    width: 60px;
+    height: 1px;
+    background: #8b2020;
+    margin-bottom: 40px;
+  }
+
+  .cover-members {
+    font-size: 13px;
+    color: #555;
+    letter-spacing: 3px;
+  }
+
+  /* Section styles */
+  .section {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 60px 40px 40px;
+  }
+
+  .section-page-break {
+    page-break-after: always;
+  }
+
+  .section-number {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 11px;
+    color: #8b2020;
+    letter-spacing: 6px;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 48px;
+    letter-spacing: 3px;
+    line-height: 1.5;
+  }
+
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: #8b2020;
+    margin-top: 20px;
+  }
+
+  /* Story section */
+  .story p {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 15px;
+    line-height: 2.2;
+    margin-bottom: 28px;
+    color: #ccc;
+  }
+
+  .story .story-accent {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .story-source {
+    font-size: 11px;
+    color: #555;
+    border-left: 2px solid #8b2020;
+    padding-left: 16px;
+    margin-bottom: 36px;
+    line-height: 1.8;
+  }
+
+  /* No break inside story blocks */
+  .story-block {
+    page-break-inside: avoid;
+  }
+
+  /* Concept section */
+  .concept-block {
+    margin-bottom: 40px;
+    page-break-inside: avoid;
+  }
+
+  .concept-label {
+    font-size: 11px;
+    color: #8b2020;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+  }
+
+  .concept-text {
+    font-size: 15px;
+    color: #ccc;
+    line-height: 2;
+  }
+
+  .concept-text strong {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .member-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .member-card {
+    border: 1px solid #222;
+    padding: 24px;
+    background: #111;
+  }
+
+  .member-role {
+    font-size: 11px;
+    color: #8b2020;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+
+  .member-name {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  /* References */
+  .ref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .ref-item {
+    padding: 16px 20px;
+    border-left: 2px solid #8b2020;
+    background: #111;
+  }
+
+  .ref-artist {
+    font-size: 13px;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .ref-desc {
+    font-size: 11px;
+    color: #777;
+    line-height: 1.6;
+  }
+
+  /* Act table */
+  .act-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+  }
+
+  .act-table th {
+    text-align: left;
+    font-size: 11px;
+    color: #555;
+    letter-spacing: 2px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #333;
+    font-weight: 400;
+  }
+
+  .act-table td {
+    font-size: 13px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #1a1a1a;
+    vertical-align: top;
+  }
+
+  .act-number {
+    color: #8b2020;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .act-theme {
+    color: #fff;
+  }
+
+  .act-emotion {
+    color: #777;
+    font-size: 12px;
+  }
+
+  .highlight-box {
+    background: rgba(139, 32, 32, 0.1);
+    border: 1px solid rgba(139, 32, 32, 0.3);
+    padding: 24px;
+    margin: 40px 0;
+  }
+
+  .highlight-box p {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 14px;
+    color: #ccc;
+    line-height: 2;
+    margin: 0;
+  }
+
+  /* Music flow */
+  .flow-item {
+    display: flex;
+    border-bottom: 1px solid #1a1a1a;
+    padding: 16px 0;
+    page-break-inside: avoid;
+  }
+
+  .flow-num {
+    width: 36px;
+    font-size: 12px;
+    color: #8b2020;
+    font-weight: 700;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .flow-body {
+    flex: 1;
+  }
+
+  .flow-song {
+    font-size: 15px;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .flow-artist {
+    font-size: 11px;
+    color: #555;
+    margin-bottom: 4px;
+  }
+
+  .flow-note {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.7;
+  }
+
+  .flow-act {
+    font-size: 11px;
+    color: #8b2020;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    margin-top: 20px;
+  }
+
+  .flow-act:first-child {
+    margin-top: 0;
+  }
+
+  .flow-break {
+    padding: 12px 0;
+    text-align: center;
+    color: #2a2a2a;
+    font-size: 11px;
+    letter-spacing: 4px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+
+  .flow-original {
+    background: rgba(139, 32, 32, 0.06);
+    margin: 0 -16px;
+    padding: 16px 16px;
+    border-left: 2px solid #8b2020;
+  }
+
+  /* Direction */
+  .direction-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .direction-card {
+    padding: 20px;
+    background: #111;
+    border: 1px solid #1a1a1a;
+    page-break-inside: avoid;
+  }
+
+  .direction-label {
+    font-size: 11px;
+    color: #8b2020;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .direction-text {
+    font-size: 13px;
+    color: #999;
+    line-height: 1.8;
+  }
+
+  /* Phase */
+  .phase-block {
+    margin-bottom: 28px;
+    padding-left: 20px;
+    border-left: 1px solid #333;
+    page-break-inside: avoid;
+  }
+
+  .phase-label {
+    font-size: 11px;
+    color: #8b2020;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+
+  .phase-title {
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .phase-desc {
+    font-size: 13px;
+    color: #888;
+  }
+
+  /* Footer */
+  .doc-footer {
+    text-align: center;
+    padding: 40px;
+    color: #333;
+    font-size: 11px;
+    letter-spacing: 3px;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="cover">
+  <div class="cover-title">BAND CONCEPT</div>
+  <div class="cover-line"></div>
+  <div class="cover-main">彼女の革命は、<br>静かに始まり、<br>終わらない。</div>
+  <div class="cover-sub">A STORY IN SOUND</div>
+  <div class="cover-members">Vo. ちゃんそら / Gt. ししまる / Ba. がーすー / Dr. らむやい</div>
+</div>
+
+<!-- PAGE 2-3: STORY -->
+<div class="section section-page-break story">
+  <div class="section-number">01 --- STORY</div>
+  <div class="section-title">物語</div>
+
+  <div class="story-block">
+    <p><span class="story-accent">彼女はずっと、正しくあろうとしていた。</span></p>
+
+    <p>誰かが決めた「正しさ」の中で息をして、笑い方も怒り方も、いつの間にか他人のものになっていた。鏡に映る自分が、自分じゃない誰かに見えた朝、ようやく気づいた。ここにいる「私」は、誰のために作られたものなのか。</p>
+
+    <div class="story-source">
+      Evanescence「Everybody's Fool」- 作られた虚像への気づき<br>
+      内田真礼「創傷イノセンス」- 無垢が壊れる瞬間
+    </div>
+  </div>
+
+  <div class="story-block">
+    <p>気づいてしまえば、もう戻れない。</p>
+
+    <p>声を上げた。おかしいものはおかしいと。美しくなくていい、正しくなくていい、ただ嘘をやめたかった。その声は誰かを怯えさせ、誰かを怒らせた。「そんなつもりじゃなかった」と言い訳する暇もなく、世界は彼女に代償を突きつけた。</p>
+
+    <div class="story-source">
+      Alanis Morissette「You Oughta Know」- 生々しい怒りの解放<br>
+      Maximum the Hormone「恋のメガラバ」- 理屈を超えた衝動
+    </div>
+  </div>
+
+  <div class="story-block">
+    <p>味方だと思っていた人が離れた。自分が信じていたものが崩れた。暗闇の底で膝を抱えて、あの頃のほうがまだ楽だったと、何度も思った。嘘でもいいから、もう一度あの場所に戻りたいと。</p>
+
+    <div class="story-source">
+      Evanescence「My Immortal」- 喪失の痛み<br>
+      レ・ミゼラブル - ファンテーヌの転落
+    </div>
+  </div>
+
+  <div class="story-block">
+    <p><span class="story-accent">でも、戻らなかった。</span></p>
+
+    <p>傷だらけの手で床を押して、立ち上がった。強いからじゃない。立つしかなかったからだ。完璧じゃない自分を、もう恥じない。折れた刃でも、まだ握れる。迷いは消えない。でも、迷いながら進むことを、彼女はもう恐れなかった。</p>
+
+    <div class="story-source">
+      LiSA「ADAMAS」- 折れない意志<br>
+      奥井雅美「輪舞-revolution」- 少女革命ウテナの気高さ。「王子様を待つ」のではなく自ら剣を取る
+    </div>
+  </div>
+
+  <div class="story-block">
+    <p><span class="story-accent">これは勝利の物語じゃない。</span></p>
+
+    <p>誰かを倒す話でも、世界を変える話でもない。ただ一人の人間が、自分の足で立ち、自分の声で語り、自分の名前で生きることを選んだ話だ。それだけのことが、どれほど困難で、どれほど美しいか。</p>
+
+    <p><span class="story-accent">彼女の革命は、静かに始まり、終わらない。</span></p>
+
+    <div class="story-source">
+      Evanescence「Going Under」→「Bring Me to Life」- 沈んでから蘇る<br>
+      バンドの原点（10/25のエバネッセンス）に回帰して締める
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4-5: CONCEPT -->
+<div class="section section-page-break">
+  <div class="section-number">02 --- CONCEPT</div>
+  <div class="section-title">バンドコンセプト</div>
+
+  <div class="concept-block">
+    <div class="concept-label">IDENTITY</div>
+    <div class="concept-text">
+      ゴシックの荘厳さ、生の感情の爆発、攻撃的なカオス、ヘヴィとメロディの共存。<br>
+      一言で言えば、<strong>「美しく殴る」音楽</strong>。<br><br>
+      静と動の落差が武器。ウィスパーから絶叫へ、ピアノからディストーションへ。
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="concept-label">MEMBERS</div>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-role">VOCAL</div>
+        <div class="member-name">ちゃんそら</div>
+      </div>
+      <div class="member-card">
+        <div class="member-role">GUITAR / CONCEPT</div>
+        <div class="member-name">ししまる</div>
+      </div>
+      <div class="member-card">
+        <div class="member-role">BASS</div>
+        <div class="member-name">がーすー</div>
+      </div>
+      <div class="member-card">
+        <div class="member-role">DRUMS</div>
+        <div class="member-name">らむやい</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="concept-label">ORIGIN</div>
+    <div class="concept-text">
+      2025年10月25日、Evanescenceのカバーをきっかけに始動。<br>
+      カバーから始め、やがて自分たちの物語を持つバンドへ。
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="concept-label">MUSICAL REFERENCES</div>
+    <div class="ref-grid">
+      <div class="ref-item">
+        <div class="ref-artist">Evanescence</div>
+        <div class="ref-desc">ゴシック、ドラマチック<br>荘厳さと激しさの共存</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-artist">Alanis Morissette</div>
+        <div class="ref-desc">生々しい感情<br>女性の怒りと解放</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-artist">Maximum the Hormone</div>
+        <div class="ref-desc">攻撃性<br>振り切ったエネルギー</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-artist">Linkin Park</div>
+        <div class="ref-desc">ヘヴィとエモーショナル<br>の融合</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <div class="concept-label">STORY REFERENCES</div>
+    <div class="ref-grid">
+      <div class="ref-item">
+        <div class="ref-artist">LiSA「ADAMAS」</div>
+        <div class="ref-desc">折れない意志</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-artist">内田真礼「創傷イノセンス」</div>
+        <div class="ref-desc">傷を負いながら戦う</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-artist">レ・ミゼラブル</div>
+        <div class="ref-desc">社会の中で闘う群像劇</div>
+      </div>
+      <div class="ref-item">
+        <div class="ref-artist">少女革命ウテナ</div>
+        <div class="ref-desc">革命、気高さ、超越</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 6: STORY STRUCTURE + MUSIC FLOW -->
+<div class="section">
+  <div class="section-number">03 --- STRUCTURE</div>
+  <div class="section-title">5幕構成</div>
+
+  <table class="act-table">
+    <thead>
+      <tr>
+        <th>ACT</th>
+        <th>THEME</th>
+        <th>EMOTION</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="act-number">第1幕</td>
+        <td class="act-theme">目覚め</td>
+        <td class="act-emotion">世界の理不尽に気づく。違和感、怒りの芽生え</td>
+      </tr>
+      <tr>
+        <td class="act-number">第2幕</td>
+        <td class="act-theme">反逆</td>
+        <td class="act-emotion">声を上げる。戦い始める。周囲との衝突</td>
+      </tr>
+      <tr>
+        <td class="act-number">第3幕</td>
+        <td class="act-theme">喪失</td>
+        <td class="act-emotion">代償を払う。孤立、傷、迷い</td>
+      </tr>
+      <tr>
+        <td class="act-number">第4幕</td>
+        <td class="act-theme">再起</td>
+        <td class="act-emotion">傷を抱えたまま立ち上がる。完璧じゃなくていい</td>
+      </tr>
+      <tr>
+        <td class="act-number">第5幕</td>
+        <td class="act-theme">革命</td>
+        <td class="act-emotion">自分の生き方そのものが革命になる</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p>ウテナが「王子様になる」のではなく「自分自身になる」話だったように、<br>
+    このストーリーも「勝つ」話ではなく「自分の足で立つ」話。</p>
+  </div>
+</div>
+
+<div class="section section-page-break" style="padding-top: 120px;">
+  <div class="section-number">04 --- MUSIC</div>
+  <div class="section-title">楽曲構成</div>
+
+  <div class="flow-act">ACT 1 --- 目覚め</div>
+
+  <div class="flow-item">
+    <div class="flow-num">01</div>
+    <div class="flow-body">
+      <div class="flow-song"><a href="https://www.youtube.com/results?search_query=Evanescence+Everybody%27s+Fool+official" style="color:#fff;text-decoration:none;border-bottom:1px solid #333;">Everybody's Fool</a></div>
+      <div class="flow-artist">Evanescence</div>
+      <div class="flow-note">「作られた自分」を演じるように始まる。虚像への違和感が滲む</div>
+    </div>
+  </div>
+
+  <div class="flow-item">
+    <div class="flow-num">02</div>
+    <div class="flow-body">
+      <div class="flow-song"><a href="https://www.youtube.com/results?search_query=%E5%86%85%E7%94%B0%E7%9C%9F%E7%A4%BC+%E5%89%B5%E5%82%B7%E3%82%A4%E3%83%8E%E3%82%BB%E3%83%B3%E3%82%B9" style="color:#fff;text-decoration:none;border-bottom:1px solid #333;">創傷イノセンス</a></div>
+      <div class="flow-artist">内田真礼</div>
+      <div class="flow-note">目が覚める瞬間。無垢が壊れ、物語が動き出す</div>
+    </div>
+  </div>
+
+  <div class="flow-break">---</div>
+
+  <div class="flow-act">ACT 2 --- 反逆</div>
+
+  <div class="flow-item">
+    <div class="flow-num">03</div>
+    <div class="flow-body">
+      <div class="flow-song"><a href="https://www.youtube.com/results?search_query=Alanis+Morissette+You+Oughta+Know+official" style="color:#fff;text-decoration:none;border-bottom:1px solid #333;">You Oughta Know</a></div>
+      <div class="flow-artist">Alanis Morissette</div>
+      <div class="flow-note">感情が剥き出しになる。怒りの解放</div>
+    </div>
+  </div>
+
+  <div class="flow-item">
+    <div class="flow-num">04</div>
+    <div class="flow-body">
+      <div class="flow-song"><a href="https://www.youtube.com/results?search_query=%E3%83%9E%E3%82%AD%E3%82%B7%E3%83%9E%E3%83%A0%E3%82%B6%E3%83%9B%E3%83%AB%E3%83%A2%E3%83%B3+%E6%81%8B%E3%81%AE%E3%83%A1%E3%82%AC%E3%83%A9%E3%83%90" style="color:#fff;text-decoration:none;border-bottom:1px solid #333;">恋のメガラバ</a></div>
+      <div class="flow-artist">Maximum the Hormone</div>
+      <div class="flow-note">理屈を超えた衝動。カオスの極点</div>
+    </div>
+  </div>
+
+  <div class="flow-break">---</div>
+
+  <div class="flow-act">ACT 3 --- 喪失</div>
+
+  <div class="flow-item">
+    <div class="flow-num">05</div>
+    <div class="flow-body">
+      <div class="flow-song"><a href="https://www.youtube.com/results?search_query=Evanescence+My+Immortal+official" style="color:#fff;text-decoration:none;border-bottom:1px solid #333;">My Immortal</a></div>
+      <div class="flow-artist">Evanescence</div>
+      <div class="flow-note">最小の音で「失ったもの」を歌う。物語の底</div>
+    </div>
+  </div>
+
+  <div class="flow-item flow-original">
+    <div class="flow-num">06</div>
+    <div class="flow-body">
+      <div class="flow-song">オリジナル曲（仮）</div>
+      <div class="flow-artist">Original</div>
+      <div class="flow-note">押し潰される感覚から「でも、戻らない」と決める瞬間。物語の核心を自分たちの言葉で語る</div>
+    </div>
+  </div>
+
+  <div class="flow-break">---</div>
+
+  <div class="flow-act">ACT 4 --- 再起</div>
+
+  <div class="flow-item">
+    <div class="flow-num">07</div>
+    <div class="flow-body">
+      <div class="flow-song"><a href="https://www.youtube.com/results?search_query=LiSA+ADAMAS+MV" style="color:#fff;text-decoration:none;border-bottom:1px solid #333;">ADAMAS</a></div>
+      <div class="flow-artist">LiSA</div>
+      <div class="flow-note">立ち上がる瞬間。折れない意志。物語のターニングポイント</div>
+    </div>
+  </div>
+
+  <div class="flow-item">
+    <div class="flow-num">08</div>
+    <div class="flow-body">
+      <div class="flow-song"><a href="https://www.youtube.com/results?search_query=%E5%A5%A5%E4%BA%95%E9%9B%85%E7%BE%8E+%E8%BC%AA%E8%88%9E+revolution" style="color:#fff;text-decoration:none;border-bottom:1px solid #333;">輪舞-revolution</a></div>
+      <div class="flow-artist">奥井雅美</div>
+      <div class="flow-note">気高さ。戦う意志を纏い、自らの足で前に進む</div>
+    </div>
+  </div>
+
+  <div class="flow-break">---</div>
+
+  <div class="flow-act">ACT 5 --- 革命</div>
+
+  <div class="flow-item">
+    <div class="flow-num">09</div>
+    <div class="flow-body">
+      <div class="flow-song"><a href="https://www.youtube.com/results?search_query=Evanescence+Going+Under+official" style="color:#fff;text-decoration:none;border-bottom:1px solid #333;">Going Under</a></div>
+      <div class="flow-artist">Evanescence</div>
+      <div class="flow-note">もう一度沈みかけるが、今度は自力で浮上する</div>
+    </div>
+  </div>
+
+  <div class="flow-item">
+    <div class="flow-num">10</div>
+    <div class="flow-body">
+      <div class="flow-song"><a href="https://www.youtube.com/results?search_query=Evanescence+Bring+Me+to+Life+official" style="color:#fff;text-decoration:none;border-bottom:1px solid #333;">Bring Me to Life</a></div>
+      <div class="flow-artist">Evanescence</div>
+      <div class="flow-note">「Wake me up」の叫びが物語の結末。原点回帰</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: DIRECTION & ROADMAP -->
+<div class="section">
+  <div class="section-number">05 --- DIRECTION</div>
+  <div class="section-title">世界観の方向性</div>
+
+  <div class="direction-grid">
+    <div class="direction-card">
+      <div class="direction-label">COLOR</div>
+      <div class="direction-text">
+        モノクロ基調に赤。<br>
+        血、意志、炎。<br>
+        物語が進むにつれ、<br>
+        色が増えていくイメージ。
+      </div>
+    </div>
+    <div class="direction-card">
+      <div class="direction-label">VISUAL MOTIF</div>
+      <div class="direction-text">
+        甲冑とドレス。<br>
+        戦う女性の二面性。<br>
+        強さと脆さが同居する<br>
+        ビジュアルを志向する。
+      </div>
+    </div>
+    <div class="direction-card">
+      <div class="direction-label">SOUND</div>
+      <div class="direction-text">
+        静と動の落差が最大の武器。<br>
+        第3幕→第4幕の転換、<br>
+        沈黙からADAMASが始まる<br>
+        瞬間が物語の核。
+      </div>
+    </div>
+    <div class="direction-card">
+      <div class="direction-label">NARRATIVE</div>
+      <div class="direction-text">
+        MCは最小限。<br>
+        曲の連なりそのものが<br>
+        物語を語る構成。<br>
+        音楽が言葉を超える。
+      </div>
+    </div>
+  </div>
+
+  <div class="section-number" style="margin-top: 48px;">06 --- ROADMAP</div>
+  <div class="section-title">展開構想</div>
+
+  <div class="phase-block">
+    <div class="phase-label">PHASE 1</div>
+    <div class="phase-title">カバー期</div>
+    <div class="phase-desc">既存曲で物語の骨格を組む。「この曲順で聴くと一つの物語になる」体験を作る。</div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-label">PHASE 2</div>
+    <div class="phase-title">オリジナル混在期</div>
+    <div class="phase-desc">物語の転換点にオリジナル曲を差し込む。核心を自分たちの言葉で語り始める。</div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-label">PHASE 3</div>
+    <div class="phase-title">完全オリジナル</div>
+    <div class="phase-desc">カバーを卒業し、全編が自分たちの物語になる。</div>
+  </div>
+
+  <div class="doc-footer">
+    2026 --- A STORY IN SOUND
+  </div>
+</div>
+
+</body>
+</html>
